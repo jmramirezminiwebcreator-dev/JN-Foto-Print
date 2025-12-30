@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JN Foto & Print</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<!-- ===== LOADING SCREEN ===== -->
+<div id="loader">
+  <div class="spinner"></div>
+  <p>Loading JN Foto & Print...</p>
+</div>
+
+<header>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+  <img src="logo.jpg" class="logo">
+  <div class="title">JN Foto & Print</div>
+  <nav>
+    <a href="booking.html">Booking</a>
+    <a href="contact.html">Contact</a>
+    <a href="gallery.html">Our Work</a>
+  </nav>
+</header>
+
+<button id="darkToggle" class="dark-toggle">🌙</button>
+
+<!-- ===== FEATURED ===== -->
+<section id="featured" class="featured-layout scroll-animate">
+  <div class="featured-text">
+    <h2 id="typing-text"></h2>
+    <p>
+      Capturing timeless moments with creativity and passion.
+      Professional photography for events, portraits, and milestones.
+    </p><br><br>
+
+    <div class="featured-buttons">
+      <a href="booking.html" class="btn primary">Book Now</a>
+      <a href="services.html" class="btn secondary">View Services</a>
+      <a href="gallery.html" class="btn secondary">Our Works</a>
+    </div>
+  </div>
+
+  <div class="featured-gallery">
+    <img class="img-hover" src="Featured Photos/1 (1).jpg">
+    <img class="img-hover" src="Featured Photos/1 (2).jpg">
+    <img class="img-hover" src="Featured Photos/1 (3).jpg">
+    <img class="img-hover" src="Featured Photos/1 (4).jpg">
+  </div>
+</section>
+
+<!-- ===== PHOTO SLIDER ===== -->
+<section class="scroll-animate">
+  <h2>Photo Gallery (Slideshow)</h2>
+
+  <div class="slider-container">
+    <div class="slider-wrapper" id="sliderWrapper">
+      <img src="Ms. Banalo 2025/1 (1).jpg">
+      <img src="Ms. Banalo 2025/1 (2).jpg">
+      <img src="Ms. Banalo 2025/1 (3).jpg">
+      <img src="Ms. Banalo 2025/1 (4).jpg">
+      <img src="Ms. Banalo 2025/1 (5).jpg">
+      <img src="Ms. Banalo 2025/1 (6).jpg">
+      <img src="Ms. Banalo 2025/1 (7).jpg">
+      <img src="Ms. Banalo 2025/1 (8).jpg">
+    </div>
+
+    <button class="slide-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="slide-btn next" onclick="moveSlide(1)">&#10095;</button>
+  </div>
+
+  <div class="dots" id="dotsContainer"></div>
+
+  <p class="gallery-desc">
+    Highlights from Ms. Banalo 2025 — elegance and confidence.
+  </p>
+</section>
+
+<!-- ===== VIDEO ===== -->
+<section class="video-layout scroll-animate">
+  <div class="video-reel">
+    <video autoplay muted loop playsinline src="Ms. Banalo 2025/video 1.mp4"></video>
+  </div>
+
+  <div class="video-text">
+    <h2>Video Gallery</h2>
+    <p>
+      Cinematic storytelling through motion.
+      Every frame is carefully crafted.
+    </p>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<div class="testimonial-slider">
+
+  <div class="testimonial active">
+    <img src="profiles/client1.jpg" class="client-img">
+    <div class="testimonial-content">
+      ⭐⭐⭐⭐⭐
+      <p>"Amazing quality and service!"</p>
+      <h4>Maria S.</h4>
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <img src="profiles/client2.jpg" class="client-img">
+    <div class="testimonial-content">
+      ⭐⭐⭐⭐☆
+      <p>"Beautiful photos, fast delivery."</p>
+      <h4>John D.</h4>
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <img src="profiles/client3.jpg" class="client-img">
+    <div class="testimonial-content">
+      ⭐⭐⭐⭐⭐
+      <p>"Highly recommended!"</p>
+      <h4>Anne C.</h4>
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <img src="profiles/client4.jpg" class="client-img">
+    <div class="testimonial-content">
+      ⭐⭐⭐⭐☆
+      <p>"Great experience overall."</p>
+      <h4>Mark L.</h4>
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <img src="profiles/client5.jpg" class="client-img">
+    <div class="testimonial-content">
+      ⭐⭐⭐⭐⭐
+      <p>"Captured every moment perfectly."</p>
+      <h4>Sophia R.</h4> 
+    </div>
+  </div>
+
+</div>
+<br><br><br>
+
+<footer>
+  <p>© 2025 JN Foto & Print. All Rights Reserved.</p>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+/* LOADER */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+  }, 1500); // 1.5s delay (50% slower feel)
+});
+
+/* SLIDER */
+let index = 0;
+const slides = document.querySelectorAll("#sliderWrapper img");
+const wrapper = document.getElementById("sliderWrapper");
+const dots = document.getElementById("dotsContainer");
+
+slides.forEach((_, i) => {
+  const d = document.createElement("span");
+  d.className = "dot";
+  d.onclick = () => goToSlide(i);
+  dots.appendChild(d);
+});
+
+function updateSlider() {
+  wrapper.style.transform = `translateX(-${index * 100}%)`;
+  document.querySelectorAll(".dot").forEach(d => d.classList.remove("active"));
+  document.querySelectorAll(".dot")[index].classList.add("active");
+}
+function moveSlide(n) {
+  index = (index + n + slides.length) % slides.length;
+  updateSlider();
+}
+function goToSlide(i) {
+  index = i;
+  updateSlider();
+}
+updateSlider();
+setInterval(() => moveSlide(1), 4000);
+
+/* TESTIMONIALS */
+let t = 0;
+const testimonials = document.querySelectorAll(".testimonial");
+setInterval(() => {
+  testimonials[t].classList.remove("active");
+  t = (t + 1) % testimonials.length;
+  testimonials[t].classList.add("active");
+}, 4000);
+
+/* SCROLL ANIMATION */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting && e.target.classList.add("show"));
+}, { threshold: 0.2 });
+document.querySelectorAll(".scroll-animate").forEach(el => observer.observe(el));
+
+/* DARK MODE */
+document.getElementById("darkToggle").onclick = () =>
+  document.body.classList.toggle("dark");
+
+/* TYPING TEXT */
+const text = "Capturing Moments That Last Forever";
+let i = 0;
+function type() {
+  if (i < text.length) {
+    document.getElementById("typing-text").innerHTML += text.charAt(i++);
+    setTimeout(type, 80);
+  }
+}
+type();
+
+/* FEATURED DESKTOP SLIDESHOW ONLY */
+if (window.innerWidth >= 1024) {
+  const featuredImgs = document.querySelectorAll(".featured-gallery img");
+  let fIndex = 0;
+
+  setInterval(() => {
+    featuredImgs.forEach(img => {
+      img.style.transform = `translateX(-${fIndex * 100}%)`;
+    });
+    fIndex = (fIndex + 1) % featuredImgs.length;
+  }, 3500);
+}
+
+
+/* HAMBURGER MENU */
+function toggleMenu() {
+  document.querySelector("nav").classList.toggle("show");
+}
+
+
+</script>
+
+</body>
+</html>
