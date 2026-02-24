@@ -1,30 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact - JN Foto & Print</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gallery | JN Foto & Print</title>
+<link rel="icon" href="favicon.jpg" type="image/x-icon">
+<link rel="stylesheet" href="Style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* HERO */
+.gallery-hero{
+  padding:70px 8%;
+  text-align:center;
+}
+
+/* FILTER BUTTONS */
+.filter-buttons{
+  text-align:center;
+  margin:40px 0;
+}
+
+.filter-buttons button{
+  padding:10px 20px;
+  margin:8px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  background:#D98c1f;
+  color:#000;
+  font-weight:600;
+  transition:.3s ease;
+}
+
+.filter-buttons button.active,
+.filter-buttons button:hover{
+  background:#b57219;
+  color:#fff;
+}
+
+/* TRUE MASONRY GRID */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  grid-auto-rows:10px;
+  gap:20px;
+  padding:0 8% 100px;
+}
+
+.gallery-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:16px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:.6s ease;
+}
+
+.gallery-item.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.gallery-item.hide{
+  display:none; /* FIXES MOBILE SORT ISSUE */
+}
+
+.gallery-item img{
+  width:100%;
+  border-radius:16px;
+  display:block;
+  transition:.4s ease;
+}
+
+.gallery-item:hover img{
+  transform:scale(1.07);
+}
+
+/* HOVER CAPTION */
+.caption{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:15px;
+  background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
+  color:white;
+  font-size:.9rem;
+  opacity:0;
+  transition:.4s;
+}
+
+.gallery-item:hover .caption{
+  opacity:1;
+}
+
+/* LIGHTBOX */
+#lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.95);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:9999;
+}
+
+#lightbox img{
+  max-width:90%;
+  max-height:75vh;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+
+.lightbox-controls{
+  display:flex;
+  gap:40px;
+  font-size:2rem;
+  color:white;
+  cursor:pointer;
+}
+
+.slideshow-btn{
+  margin-top:15px;
+  padding:8px 18px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  background:#D98c1f;
+}
+
+/* MOBILE SCROLL SNAP */
+@media(max-width:600px){
+  .gallery-grid{
+    padding:0 5% 80px;
+  }
+}
+
+</style>
 </head>
-<body>
-  <header>
-    <div>JN Foto & Print</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="booking.html">Booking</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: info@jnfotoprint.com</p>
-    <p>Phone: +63 900 000 0000</p>
-    <p>Facebook: JN Foto & Print</p>
-  </section>
+<body class="dark">
 
-  <footer>
-    © 2025 JN Foto & Print. All Rights Reserved.
-  </footer>
+<div class="loader"><div class="spinner"></div></div>
+
+<header>
+  <div class="logo">
+      <img src="logo.png"  alt="JN Foto & Print Logo"> <p>JN Foto & Print</p>
+  </div>
+
+  <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+  </div>
+
+  <nav id="navMenu">
+    <a href="Index.html">Home</a>
+    <a href="Gallery.html">Gallery</a>
+    <a href="Product.html">Product</a>
+    <a href="#">Contact</a>
+    <button id="bgToggle">🌙</button>
+  </nav>
+</header>
+
+<section class="gallery-hero">
+  <h1>Premium Photo Collection</h1>
+  <p>Professional work by JN Foto & Print</p>
+</section>
+
+<div class="filter-buttons">
+  <button class="active" data-filter="all">All</button>
+  <button data-filter="wedding">Wedding</button>
+  <button data-filter="portrait">Portrait</button>
+  <button data-filter="events">Events</button>
+  <button data-filter="creative">Creative</button>
+  <button data-filter="family">Family</button>
+</div>
+
+<div class="gallery-grid" id="gallery">
+
+  <div class="gallery-item wedding">
+    <img loading="lazy" src="800x1200/1.jpg">
+    <div class="caption">Elegant Wedding Moment</div>
+  </div>
+
+  <div class="gallery-item portrait">
+    <img loading="lazy" src="800x1200/2.jpg">
+    <div class="caption">Creative Portrait Session</div>
+  </div>
+
+  <div class="gallery-item events">
+    <img loading="lazy" src="800x1200/3.jpg">
+    <div class="caption">Corporate Event Coverage</div>
+  </div>
+
+  <div class="gallery-item creative">
+    <img loading="lazy" src="800x1200/4.jpg">
+    <div class="caption">Artistic Creative Shoot</div>
+  </div>
+
+  <div class="gallery-item family">
+    <img loading="lazy" src="800x1200/5.jpg">
+    <div class="caption">Family Lifestyle Session</div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <img id="lightbox-img">
+  <div class="lightbox-controls">
+    <span id="prev"><i class="fa-solid fa-chevron-left"></i></span>
+    <span id="close"><i class="fa-solid fa-xmark"></i></span>
+    <span id="next"><i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+  <button class="slideshow-btn" id="slideshowToggle">Start Slideshow</button>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+
+/* Masonry height calculation */
+function resizeGridItem(item){
+  const grid=document.getElementById("gallery");
+  const rowHeight=parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+  const rowGap=parseInt(window.getComputedStyle(grid).getPropertyValue('gap'));
+  const rowSpan=Math.ceil((item.querySelector("img").getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+  item.style.gridRowEnd="span "+rowSpan;
+}
+
+function resizeAll(){
+  document.querySelectorAll(".gallery-item").forEach(resizeGridItem);
+}
+
+window.addEventListener("load",resizeAll);
+window.addEventListener("resize",resizeAll);
+
+/* Reveal Animation */
+const items=document.querySelectorAll(".gallery-item");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:.1});
+
+items.forEach(item=>observer.observe(item));
+
+/* FILTER FIXED */
+const buttons=document.querySelectorAll(".filter-buttons button");
+
+buttons.forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    buttons.forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const filter=btn.dataset.filter;
+
+    items.forEach(item=>{
+      if(filter==="all" || item.classList.contains(filter)){
+        item.classList.remove("hide");
+        setTimeout(()=>resizeGridItem(item),50);
+      }else{
+        item.classList.add("hide");
+      }
+    });
+
+    window.scrollTo({top:document.querySelector(".gallery-hero").offsetTop-80,behavior:"smooth"});
+  });
+});
+
+/* LIGHTBOX + SLIDESHOW + SWIPE */
+const lightbox=document.getElementById("lightbox");
+const lightboxImg=document.getElementById("lightbox-img");
+const images=document.querySelectorAll(".gallery-item img");
+let currentIndex=0;
+let slideInterval=null;
+
+images.forEach((img,index)=>{
+  img.addEventListener("click",()=>{
+    currentIndex=index;
+    lightbox.style.display="flex";
+    lightboxImg.src=img.src;
+  });
+});
+
+function showImage(index){
+  lightboxImg.src=images[index].src;
+}
+
+document.getElementById("next").onclick=()=>{
+  currentIndex=(currentIndex+1)%images.length;
+  showImage(currentIndex);
+};
+
+document.getElementById("prev").onclick=()=>{
+  currentIndex=(currentIndex-1+images.length)%images.length;
+  showImage(currentIndex);
+};
+
+document.getElementById("close").onclick=()=>{
+  lightbox.style.display="none";
+  clearInterval(slideInterval);
+  document.getElementById("slideshowToggle").textContent="Start Slideshow";
+};
+
+document.getElementById("slideshowToggle").onclick=()=>{
+  if(slideInterval){
+    clearInterval(slideInterval);
+    slideInterval=null;
+    event.target.textContent="Start Slideshow";
+  }else{
+    slideInterval=setInterval(()=>{
+      currentIndex=(currentIndex+1)%images.length;
+      showImage(currentIndex);
+    },3000);
+    event.target.textContent="Stop Slideshow";
+  }
+};
+
+/* Swipe */
+let touchStartX=0;
+lightbox.addEventListener("touchstart",e=>{
+  touchStartX=e.changedTouches[0].screenX;
+});
+lightbox.addEventListener("touchend",e=>{
+  let diff=e.changedTouches[0].screenX-touchStartX;
+  if(diff>50) document.getElementById("prev").click();
+  if(diff<-50) document.getElementById("next").click();
+});
+
+</script>
+
 </body>
 </html>

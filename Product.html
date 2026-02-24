@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products | JN Foto & Print</title>
+
+<link rel="stylesheet" href="Style.css">
+
+<style>
+
+.product-section{
+padding:80px 10%;
+text-align:center;
+}
+
+.product-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+margin-top:50px;
+}
+
+.product-card{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:20px;
+transition:.4s;
+}
+
+.product-card:hover{
+transform:translateY(-10px);
+}
+
+.product-card img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.price{
+color:#D98c1f;
+font-weight:bold;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body class="dark">
+
+<header>
+<div class="logo">
+<img src="logo.png"> <p>JN Foto & Print</p>
+</div>
+
+<nav id="navMenu">
+    <a href="Index.html">Home</a>
+    <a href="Gallery.html">Gallery</a>
+    <a href="Product.html">Product</a>
+    <a href="#">Contact</a>
+    <button id="bgToggle">🌙</button>
+  </nav>
+</header>
+<section class="product-section">
+
+<h1>Our Printing Services</h1>
+<p>High-quality printing for events, business, and personal needs.</p>
+
+<div class="product-grid">
+
+<div class="product-card">
+<img src="products/tarpaulin.jpg">
+<h3>Tarpaulin Printing</h3>
+<p>Birthday, wedding, and event tarpaulin prints.</p>
+<p class="price">Starting ₱120</p>
+</div>
+
+<div class="product-card">
+<img src="products/mug.jpg">
+<h3>Mug Souvenirs</h3>
+<p>Customized mug printing for giveaways.</p>
+<p class="price">Starting ₱150</p>
+</div>
+
+<div class="product-card">
+<img src="products/photo.jpg">
+<h3>Photo Printing</h3>
+<p>High-resolution glossy and matte prints.</p>
+<p class="price">Starting ₱10</p>
+</div>
+
+<div class="product-card">
+<img src="products/souvenir.jpg">
+<h3>Event Souvenirs</h3>
+<p>Personalized souvenirs for all occasions.</p>
+<p class="price">Custom Price</p>
+</div>
+
+<div class="product-card">
+<img src="products/id.jpg">
+<h3>ID Pictures</h3>
+<p>Rush ID picture packages.</p>
+<p class="price">Starting ₱80</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+<p>© 2025 JN Foto & Print</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
